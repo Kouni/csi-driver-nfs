@@ -6,7 +6,7 @@ metadata:
   labels:
     app: nfs-server
 spec:
-  type: ClusterIP  # use "LoadBalancer" to get a public ip
+  type: ClusterIP # use "LoadBalancer" to get a public ip
   selector:
     app: nfs-server
   ports:
@@ -42,7 +42,7 @@ spec:
               value: "/exports"
           volumeMounts:
             - mountPath: /exports
-              name: nfs-vol
+              name: mobanfs-ebs-vol
           securityContext:
             privileged: true
           ports:
@@ -53,7 +53,7 @@ spec:
               containerPort: 111
               protocol: UDP
       volumes:
-        - name: nfs-vol
-          hostPath:
-            path: /nfs-vol  # modify this to specify another path to store nfs share data
-            type: DirectoryOrCreate
+        - name: mobanfs-ebs-vol
+          awsElasticBlockStore:
+            volumeID: vol-0ea72e82dff886725
+            fsType: ext4
