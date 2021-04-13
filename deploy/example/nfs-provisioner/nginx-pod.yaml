@@ -15,9 +15,9 @@ spec:
   csi:
     driver: nfs.csi.k8s.io
     readOnly: false
-    volumeHandle: unique-volumeid  # make sure it's a unique id in the cluster
+    volumeHandle: unique-volumeid # make sure it's a unique id in the cluster
     volumeAttributes:
-      server: nfs-server.default.svc.cluster.local
+      server: nfs-server.default.svc.dev.belstardoc.com
       share: /
 ---
 kind: PersistentVolumeClaim
